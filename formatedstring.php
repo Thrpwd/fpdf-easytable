@@ -67,7 +67,7 @@
 
    private function style_parcer($text, &$font_data){
       $str=trim(strtr($text, array("\r"=>'', "\t"=>'')));
-      $rep=array('[bB]{1}'=>'B', '[iI]{1}'=>'I', '[iI]{1}[ ]*[bB]{1}'=>'BI', '[bB]{1}[ ]*[iI]{1}'=>'BI' );
+      $rep=array('[bB]{1}'=>'B', '[iI]{1}'=>'I', '[iI]{1}[ ]*[bB]{1}'=>'BI', '[bB]{1}[ ]*[iI]{1}'=>'BI', '[uU]{1}'=>'U' );
       foreach($rep as $a=>$v){
          $str=preg_replace('/<[ ]*'.$a.'[ ]*>/', "<$v>", $str);
          $str=preg_replace('/<[ ]*\/+[ ]*'.$a.'[ ]*>/', "</$v>", $str);
@@ -78,6 +78,8 @@
       $str=preg_replace('/<\/B>/', "</s>", $str);
       $str=preg_replace('/<I>/', '<s "font-style:I;">', $str);
       $str=preg_replace('/<\/I>/', "</s>", $str);
+      $str=preg_replace('/<U>/', '<s "font-style:U;">', $str);
+      $str=preg_replace('/<\/U>/', "</s>", $str);
       $open=array();
       $total=array();
       $lt="<s";
